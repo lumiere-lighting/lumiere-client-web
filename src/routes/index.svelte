@@ -55,6 +55,10 @@
 			<p>
 				Showing: <strong>{$lights.colorNames.join(', ')}</strong>
 			</p>
+		{:else if $lights.image}
+			<p>
+				Showing: <strong><em>Colors from an uploaded image.</em></strong>
+			</p>
 		{/if}
 	</section>
 
