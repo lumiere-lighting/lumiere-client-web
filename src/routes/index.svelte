@@ -4,9 +4,10 @@
 
 <script>
 	import ColorText from '../components/color-text.svelte';
-	import { spreadColors } from '$lib/utils';
 	import { apiDomain } from '../lib/config';
 	import lights from '../stores/lights';
+	import bulbIconOn from '../assets/images/icons/bulb-on.svg';
+	import bulbIconOff from '../assets/images/icons/bulb-off.svg';
 
 	let inputLights;
 	let inputError;
@@ -76,7 +77,17 @@
 					placeholder="Change lights"
 					aria-describedby="change-lights-help"
 				/>
-				<input type="submit" value="Submit" />
+
+				<button type="submit">
+					<svg class="svg-icon-bulb-on">
+						<use xlink:href="{bulbIconOn}#icon-bulb-on" />
+					</svg>
+					<svg class="svg-icon-bulb-off">
+						<use xlink:href="{bulbIconOff}#icon-bulb-off" />
+					</svg>
+
+					<span class="sr-only">Submit</span>
+				</button>
 			</div>
 
 			<small id="change-lights-help">
@@ -134,6 +145,36 @@
 	input[type='text'] {
 		width: 100%;
 		margin-right: 1rem;
+	}
+
+	button {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.svg-icon-bulb-off,
+	.svg-icon-bulb-on {
+		height: 1em;
+		max-width: 2em;
+	}
+
+	button .svg-icon-bulb-on {
+		display: none;
+		transition: all 0.5s ease-in-out;
+	}
+	button .svg-icon-bulb-off {
+		display: inline-block;
+		transition: all 0.5s ease-in-out;
+	}
+
+	button:focus .svg-icon-bulb-on,
+	button:hover .svg-icon-bulb-on {
+		display: inline-block;
+		fill: white;
+	}
+	button:focus .svg-icon-bulb-off,
+	button:hover .svg-icon-bulb-off {
+		display: none;
 	}
 
 	.error {

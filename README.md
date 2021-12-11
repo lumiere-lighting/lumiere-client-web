@@ -17,3 +17,7 @@ To build static site:
 ```bash
 npm run build
 ```
+
+## Credits
+
+- [Bulb icon](https://thenounproject.com/icon/christmas-light-27790/)
