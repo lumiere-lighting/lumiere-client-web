@@ -7,6 +7,7 @@
 	let width;
 	let height;
 	let lightSize = 50;
+	let lightSpace = 0.4;
 
 	$: columns = Math.ceil(width / lightSize + 3);
 	$: rows = Math.ceil(height / lightSize + 3);
@@ -17,7 +18,7 @@
 	class="lights-background"
 	bind:clientWidth={width}
 	bind:clientHeight={height}
-	style="--light-size: {lightSize * 0.7}px; --light-space: {lightSize * 0.3}px;"
+	style="--light-size: {lightSize * (1 - lightSpace)}px; --light-space: {lightSize * lightSpace}px;"
 >
 	<div class="lights-container">
 		{#if spreadLights && spreadLights.length && spreadLights[0]}
