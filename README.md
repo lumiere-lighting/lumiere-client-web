@@ -18,6 +18,14 @@ To build static site:
 npm run build
 ```
 
+## Deploy
+
+Deployed to Github Pages.  The following will build and publish site.
+
+```bash
+npm run deploy
+```
+
 ## Credits
 
 - [Bulb icon](https://thenounproject.com/icon/christmas-light-27790/)
