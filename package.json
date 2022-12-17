@@ -27,6 +27,7 @@
 	"dependencies": {
 		"chance": "^1.1.8",
 		"chroma-js": "^2.1.2",
+		"flexsearch": "^0.7.31",
 		"lodash-es": "^4.17.21",
 		"normalize.css": "^8.0.1",
 		"socket.io-client": "^4.4.0"

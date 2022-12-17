@@ -25,9 +25,9 @@
 			{#each spreadLights as color, ci (ci)}
 				<div
 					class="light"
-					style="color: {chroma(color)
-						.alpha(0.5)
-						.css()}; background-color: {color}; border-color: {chroma(color).brighten(0.5).css()}"
+					style:color={chroma(color).alpha(0.5).css()}
+          style:background-color={color}
+          style:border-color={chroma(color).brighten(0.5).css()}
 				/>
 			{/each}
 		{/if}

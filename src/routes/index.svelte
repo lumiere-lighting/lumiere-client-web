@@ -3,9 +3,12 @@
 </script>
 
 <script>
+	import { onMount } from 'svelte';
 	import ColorText from '../components/color-text.svelte';
+	import ColorInput from '../components/color-input.svelte';
 	import { apiDomain } from '../lib/config';
 	import lights from '../stores/lights';
+	import { loadColors } from '../stores/colors';
 	import bulbIconOn from '../assets/images/icons/bulb-on.svg';
 	import bulbIconOff from '../assets/images/icons/bulb-off.svg';
 
@@ -42,6 +45,10 @@
 	function updateLights(color) {
 		inputLights = color;
 	}
+
+	onMount(async () => {
+		loadColors();
+	});
 </script>
 
 <svelte:head>
@@ -70,13 +77,7 @@
 			<label class="sr-only" for="change-lights">Change lights</label>
 
 			<div class="inputs">
-				<input
-					type="text"
-					id="change-lights"
-					bind:value={inputLights}
-					placeholder="Change lights"
-					aria-describedby="change-lights-help"
-				/>
+				<ColorInput bind:inputColors={inputLights} id="change-lights" />
 
 				<button type="submit">
 					<svg class="svg-icon-bulb-on">
@@ -92,7 +93,7 @@
 
 			<small id="change-lights-help">
 				Change lights by typing in colors. There are thousands of color names and combinations to
-				choose from.
+				choose from. Separate multiple with a comma. Stuck, just try "<em>random</em>".
 
 				{#if inputError}
 					<span class="error">
@@ -142,14 +143,10 @@
 		width: 100%;
 	}
 
-	input[type='text'] {
-		width: 100%;
-		margin-right: 1rem;
-	}
-
 	button {
 		padding-left: 0;
 		padding-right: 0;
+		min-width: 2em;
 	}
 
 	.svg-icon-bulb-off,

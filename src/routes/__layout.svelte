@@ -26,7 +26,13 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: center;
+		justify-content: flex-start;
 		height: 100vh;
+	}
+
+	@media screen and (min-width: 850px) {
+		main {
+			justify-content: center;
+		}
 	}
 </style>
