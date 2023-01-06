@@ -1,8 +1,6 @@
 // Dependencies
 import { apiDomain } from '../lib/config';
-// Flexsearch bundling is weird
-// https://github.com/nextapps-de/flexsearch/issues/341
-import flexsearch from 'flexsearch/dist/flexsearch.bundle';
+import Fuse from 'fuse.js';
 
 // Colors index
 let colorsIndex = null;
@@ -20,19 +18,9 @@ async function loadColors() {
     });
     const colors = (await colorFetch.json()).results;
 
-    // Make index
-    colorsIndex = new flexsearch.Document({
-      tokenize: 'full',
-      document: {
-        id: 'id',
-        index: ['name'],
-        store: true,
-      }
-    });
-
-    // Add documents
-    colors.forEach((color) => {
-      colorsIndex.add(color)
+    colorsIndex = new Fuse(colors, {
+      includeScore: true,
+      keys: ['name', 'id']
     });
   }
   catch (e) {

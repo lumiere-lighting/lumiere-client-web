@@ -1,6 +1,7 @@
 <script>
 	// Dependencies
   import chroma from 'chroma-js';
+  import { debounce } from 'lodash-es';
   import { colorsIndex } from '../stores/colors';
 
 	// Props
@@ -16,7 +17,7 @@
   $: suggestions = inputColors === '' ? [] : suggestions;
 
   // Suggest colors
-  function suggestColors() {
+  function suggestColorsSimple() {
     // Comma separate
     let sets = inputColors.split(',');
     sets = sets.map(s => s.trim());
@@ -36,13 +37,12 @@
     }
 
     // Do search
-    let search = colorsIndex.search(last, { enrich: true, limit: 50 });
-    if (search && search[0] && search[0].result && search[0].result.length > 1) {
-      suggestions = search[0].result;
-    }
+    let search = colorsIndex.search(last);
+    suggestions = search.sort((a, b) => a.score - b.score).slice(0, 50).map(s => s.item);
 
     recentSearch = last;
   }
+  const suggestColors = debounce(suggestColorsSimple, 250);
 
   // Add a color (via click)
   function addColorSuggestion(color) {
@@ -62,7 +62,7 @@
       return;
     }
 
-    addColorSuggestion(suggestions[suggestionSelected].doc.name);
+    addColorSuggestion(suggestions[suggestionSelected].name);
   }
 
   // Move selection down list
@@ -152,7 +152,7 @@
       {#each suggestions as suggestion, sIndex (suggestion.id)}
         <ul
           role="button"
-          on:click={addColorSuggestion(suggestion.doc.name)}
+          on:click={addColorSuggestion(suggestion.name)}
           on:keyup={suggestionKey}
         >
           <li
@@ -160,9 +160,9 @@
             tabindex="-1"
             aria-selected={suggestionSelected === sIndex ? "true" : "false"}
           >
-            <span>{suggestion.doc.name}</span>
+            <span>{suggestion.name}</span>
             <ul class="swatches">
-              {#each suggestion.doc.colors as color}
+              {#each suggestion.colors as color}
                 <li
                   style:background-color={color}
                   style:color={chroma(color).alpha(0.5).css()}
