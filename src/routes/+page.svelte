@@ -1,6 +1,7 @@
 <script>
 	import '../app.css';
 	import LightsBackground from '../components/lights-background.svelte';
+	import ColorSelector from '../components/color-selector.svelte';
 </script>
 
 <LightsBackground />
@@ -16,7 +17,7 @@
 </header>
 
 <main>
-	<slot />
+	<ColorSelector />
 </main>
 
 <footer />

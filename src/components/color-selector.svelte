@@ -1,11 +1,7 @@
-<script context="module">
-	export const prerender = true;
-</script>
-
 <script>
 	import { onMount } from 'svelte';
-	import ColorText from '../components/color-text.svelte';
-	import ColorInput from '../components/color-input.svelte';
+	import ColorText from './color-text.svelte';
+	import ColorInput from './color-input.svelte';
 	import { apiDomain } from '../lib/config';
 	import lights from '../stores/lights';
 	import { loadColors } from '../stores/colors';

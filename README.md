@@ -20,7 +20,7 @@ npm run build
 
 ## Deploy
 
-Deployed to Github Pages.  The following will build and publish site.
+Deployed to Github Pages. The following will build and publish site.
 
 ```bash
 npm run deploy
